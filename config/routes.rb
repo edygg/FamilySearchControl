@@ -1,4 +1,10 @@
 FamilySearchControl::Application.routes.draw do
+  resources :ordinances
+
+  resources :ordinance_types
+
+  resources :ancestors
+
   resources :senders
 
   devise_for :users

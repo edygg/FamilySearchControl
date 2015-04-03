@@ -1,0 +1,2 @@
+module OrdinanceTypesHelper
+end

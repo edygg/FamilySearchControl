@@ -1,0 +1,27 @@
+<h1>Listing ordinances</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Performed in</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ordinances.each do |ordinance| %>
+      <tr>
+        <td><%= ordinance.performed_in %></td>
+        <td><%= link_to 'Show', ordinance %></td>
+        <td><%= link_to 'Edit', edit_ordinance_path(ordinance) %></td>
+        <td><%= link_to 'Destroy', ordinance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ordinance', new_ordinance_path %>

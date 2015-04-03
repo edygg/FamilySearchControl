@@ -1,0 +1,21 @@
+<%= form_for(@ordinance) do |f| %>
+  <% if @ordinance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ordinance.errors.count, "error") %> prohibited this ordinance from being saved:</h2>
+
+      <ul>
+      <% @ordinance.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :performed_in %><br>
+    <%= f.date_select :performed_in %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

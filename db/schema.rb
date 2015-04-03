@@ -11,10 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150403163112) do
+ActiveRecord::Schema.define(version: 20150403181748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ancestors", force: true do |t|
+    t.string   "names"
+    t.string   "last_names"
+    t.integer  "user_id"
+    t.integer  "sender_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ordinance_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ordinances", force: true do |t|
+    t.date     "performed_in"
+    t.integer  "ancestor_id"
+    t.integer  "ordinance_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ordinances", ["ancestor_id", "ordinance_type_id"], name: "index_ordinances_on_ancestor_id_and_ordinance_type_id", unique: true, using: :btree
 
   create_table "senders", force: true do |t|
     t.string   "names"
@@ -25,9 +50,14 @@ ActiveRecord::Schema.define(version: 20150403163112) do
     t.string   "lds_password"
     t.boolean  "adult"
     t.boolean  "young"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "senders", ["lds_user"], name: "index_senders_on_lds_user", unique: true, using: :btree
+  add_index "senders", ["nim"], name: "index_senders_on_nim", unique: true, using: :btree
+  add_index "senders", ["user_id"], name: "index_senders_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

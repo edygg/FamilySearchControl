@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Names:</strong>
+  <%= @ancestor.names %>
+</p>
+
+<p>
+  <strong>Last names:</strong>
+  <%= @ancestor.last_names %>
+</p>
+
+<%= link_to 'Edit', edit_ancestor_path(@ancestor) %> |
+<%= link_to 'Back', ancestors_path %>

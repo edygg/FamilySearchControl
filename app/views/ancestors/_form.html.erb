@@ -1,0 +1,25 @@
+<%= form_for(@ancestor) do |f| %>
+  <% if @ancestor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ancestor.errors.count, "error") %> prohibited this ancestor from being saved:</h2>
+
+      <ul>
+      <% @ancestor.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :names %><br>
+    <%= f.text_field :names %>
+  </div>
+  <div class="field">
+    <%= f.label :last_names %><br>
+    <%= f.text_field :last_names %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
