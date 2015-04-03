@@ -1,0 +1,49 @@
+<%= form_for(@sender) do |f| %>
+  <% if @sender.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sender.errors.count, "error") %> prohibited this sender from being saved:</h2>
+
+      <ul>
+      <% @sender.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :names %><br>
+    <%= f.text_field :names %>
+  </div>
+  <div class="field">
+    <%= f.label :last_names %><br>
+    <%= f.text_field :last_names %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %><br>
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :nim %><br>
+    <%= f.text_field :nim %>
+  </div>
+  <div class="field">
+    <%= f.label :lds_user %><br>
+    <%= f.text_field :lds_user %>
+  </div>
+  <div class="field">
+    <%= f.label :lds_password %><br>
+    <%= f.text_field :lds_password %>
+  </div>
+  <div class="field">
+    <%= f.label :adult %><br>
+    <%= f.check_box :adult %>
+  </div>
+  <div class="field">
+    <%= f.label :young %><br>
+    <%= f.check_box :young %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

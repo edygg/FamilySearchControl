@@ -1,0 +1,41 @@
+<h1>Listing senders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Names</th>
+      <th>Last names</th>
+      <th>Phone</th>
+      <th>Nim</th>
+      <th>Lds user</th>
+      <th>Lds password</th>
+      <th>Adult</th>
+      <th>Young</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @senders.each do |sender| %>
+      <tr>
+        <td><%= sender.names %></td>
+        <td><%= sender.last_names %></td>
+        <td><%= sender.phone %></td>
+        <td><%= sender.nim %></td>
+        <td><%= sender.lds_user %></td>
+        <td><%= sender.lds_password %></td>
+        <td><%= sender.adult %></td>
+        <td><%= sender.young %></td>
+        <td><%= link_to 'Show', sender %></td>
+        <td><%= link_to 'Edit', edit_sender_path(sender) %></td>
+        <td><%= link_to 'Destroy', sender, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sender', new_sender_path %>
