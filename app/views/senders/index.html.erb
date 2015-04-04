@@ -1,16 +1,16 @@
-<h1>Listing senders</h1>
+<div class="jumbotron">
+  <h1>Enviadores</h1>
+  <p>Los enviadores son personas que se han esforzado en la empresa de recolectar información de sus antepasados.</p>
+</div>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
-      <th>Names</th>
-      <th>Last names</th>
-      <th>Phone</th>
-      <th>Nim</th>
-      <th>Lds user</th>
-      <th>Lds password</th>
-      <th>Adult</th>
-      <th>Young</th>
+      <th>Nombres</th>
+      <th>Apellidos</th>
+      <th>Teléfono</th>
+      <th>NIM</th>
+      <th>Edad</th>
       <th></th>
       <th></th>
       <th></th>
@@ -24,13 +24,10 @@
         <td><%= sender.last_names %></td>
         <td><%= sender.phone %></td>
         <td><%= sender.nim %></td>
-        <td><%= sender.lds_user %></td>
-        <td><%= sender.lds_password %></td>
-        <td><%= sender.adult %></td>
-        <td><%= sender.young %></td>
-        <td><%= link_to 'Show', sender %></td>
-        <td><%= link_to 'Edit', edit_sender_path(sender) %></td>
-        <td><%= link_to 'Destroy', sender, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= 'Adulto' if sender.adult %> <%= 'Joven' if sender.young %></td>
+        <td><%= link_to 'Ver detalles', sender %></td>
+        <td><%= link_to 'Editar', edit_sender_path(sender) %></td>
+        <td><%= link_to 'Eliminar', sender, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -38,4 +35,4 @@
 
 <br>
 
-<%= link_to 'New Sender', new_sender_path %>
+<%= link_to 'Nuevo enviador', new_sender_path, class: 'btn btn-success' %>

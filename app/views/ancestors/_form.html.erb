@@ -1,4 +1,4 @@
-<%= form_for(@ancestor) do |f| %>
+<%= form_for([@sender, @ancestor]) do |f| %>
   <% if @ancestor.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@ancestor.errors.count, "error") %> prohibited this ancestor from being saved:</h2>

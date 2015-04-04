@@ -26,7 +26,8 @@ class SendersController < ApplicationController
   # POST /senders.json
   def create
     @sender = Sender.new(sender_params)
-
+    @sender.user_id = current_user.id
+    
     respond_to do |format|
       if @sender.save
         format.html { redirect_to @sender, notice: 'Sender was successfully created.' }

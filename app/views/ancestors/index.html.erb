@@ -16,9 +16,9 @@
       <tr>
         <td><%= ancestor.names %></td>
         <td><%= ancestor.last_names %></td>
-        <td><%= link_to 'Show', ancestor %></td>
-        <td><%= link_to 'Edit', edit_ancestor_path(ancestor) %></td>
-        <td><%= link_to 'Destroy', ancestor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', [@sender, ancestor] %></td>
+        <td><%= link_to 'Edit', edit_sender_ancestor_path(@sender, ancestor) %></td>
+        <td><%= link_to 'Destroy', [@sender, ancestor], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Ancestor', new_ancestor_path %>
+<%= link_to 'New Ancestor', new_sender_ancestor_path %>

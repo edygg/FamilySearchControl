@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @ancestor %> |
-<%= link_to 'Back', ancestors_path %>
+<%= link_to 'Show', [@sender, @ancestor] %> |
+<%= link_to 'Back', sender_ancestors_path(@sender) %>

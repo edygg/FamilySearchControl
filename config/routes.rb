@@ -1,11 +1,12 @@
 FamilySearchControl::Application.routes.draw do
-  resources :ordinances
 
   resources :ordinance_types
 
-  resources :ancestors
-
-  resources :senders
+  resources :senders do
+    resources :ancestors do
+      resources :ordinances
+    end
+  end
 
   devise_for :users
   get "home/index"

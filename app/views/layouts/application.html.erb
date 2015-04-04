@@ -5,10 +5,67 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 
-<%= yield %>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <%= link_to(root_path, { class: 'navbar-brand' }) do %>
+          <%= icon('pagelines', 'FamilySearchControl') %>
+        <% end %>
+      </div>
+      
+      <% if user_signed_in?  %>
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><%= icon('caret-down', 'Enviadores') %></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to('Agregar', new_sender_path) %></li>
+              <li><%= link_to('Ver todos', senders_path) %></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><%= icon('caret-down', 'Antepasados') %></a>
+            <ul class="dropdown-menu">
+                <li><a>Agregar</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><%= icon('caret-down', 'Ordenanzas') %></a>
+            <ul class="dropdown-menu">
+                <li><a>Agregar</a></li>
+            </ul>
+          </li>
+        </ul>
+      <% end %>
+      
+      <% unless user_signed_in? %>
+        <div class="navbar-right">
+          <%= link_to('Registrate', new_user_registration_path, class: 'btn btn-info navbar-btn') %>
+          <%= link_to('Entrar', new_user_session_path, class: 'btn btn-default navbar-btn') %>
+        </div>
+      <% else %>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><%= current_user.email %><%= icon('caret-down') %></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to('Salir', destroy_user_session_path, method: :delete) %></li>
+            </ul>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+  </nav>
+  
+  <main class="container-fluid">
+    <div class="col-sm-10 col-sm-offset-1">
+      <%= yield %>
+    </div>
+  </main>
 
 </body>
 </html>

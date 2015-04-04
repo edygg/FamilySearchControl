@@ -1,44 +1,52 @@
+<div class="jumbotron">
+  <h1>Detalles de un enviador</h1>
+</div>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Names:</strong>
-  <%= @sender.names %>
-</p>
+<div class="row">
+  <div class="col-sm-6 col-md-offset-3">
+    <p>
+      <strong>Nombres:</strong>
+      <%= @sender.names %>
+    </p>
 
-<p>
-  <strong>Last names:</strong>
-  <%= @sender.last_names %>
-</p>
+    <p>
+      <strong>Apellidos:</strong>
+      <%= @sender.last_names %>
+    </p>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @sender.phone %>
-</p>
+    <p>
+      <strong>Teléfono:</strong>
+      <%= @sender.phone %>
+    </p>
 
-<p>
-  <strong>Nim:</strong>
-  <%= @sender.nim %>
-</p>
+    <p>
+      <strong>NIM:</strong>
+      <%= @sender.nim %>
+    </p>
 
-<p>
-  <strong>Lds user:</strong>
-  <%= @sender.lds_user %>
-</p>
+    <p>
+      <strong>LDS user:</strong>
+      <%= @sender.lds_user %>
+    </p>
 
-<p>
-  <strong>Lds password:</strong>
-  <%= @sender.lds_password %>
-</p>
+    <p>
+      <strong>LDS password:</strong>
+      <%= @sender.lds_password %>
+    </p>
 
-<p>
-  <strong>Adult:</strong>
-  <%= @sender.adult %>
-</p>
-
-<p>
-  <strong>Young:</strong>
-  <%= @sender.young %>
-</p>
-
-<%= link_to 'Edit', edit_sender_path(@sender) %> |
-<%= link_to 'Back', senders_path %>
+    <p>
+      <strong>Edad:</strong>
+      <%= 'Adulto' if @sender.adult %> <%= 'Joven' if @sender.young %>
+    </p>
+  </div> 
+</div>
+<div class="row">
+  <div class="btn-group">
+    <%= link_to senders_path, class: 'btn btn-default' do %>
+    <%= icon('arrow-left') %>
+    <% end %>
+    <%= link_to 'Editar', edit_sender_path(@sender), class: 'btn btn-info'  %>
+  </div>
+</div>
