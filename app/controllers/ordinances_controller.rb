@@ -1,10 +1,12 @@
 class OrdinancesController < ApplicationController
   before_action :set_ordinance, only: [:show, :edit, :update, :destroy]
+  before_action :set_sender
+  before_action :set_ancestor
 
   # GET /ordinances
   # GET /ordinances.json
   def index
-    @ordinances = Ordinance.all
+    @ordinances = @ancestor.ordinances
   end
 
   # GET /ordinances/1
@@ -14,7 +16,7 @@ class OrdinancesController < ApplicationController
 
   # GET /ordinances/new
   def new
-    @ordinance = Ordinance.new
+    @ordinance = @ancestor.ordinances.new
   end
 
   # GET /ordinances/1/edit
@@ -24,11 +26,11 @@ class OrdinancesController < ApplicationController
   # POST /ordinances
   # POST /ordinances.json
   def create
-    @ordinance = Ordinance.new(ordinance_params)
+    @ordinance = @ancestor.ordinances.new(ordinance_params)
 
     respond_to do |format|
       if @ordinance.save
-        format.html { redirect_to @ordinance, notice: 'Ordinance was successfully created.' }
+        format.html { redirect_to sender_ancestors_path(@sender), notice: 'Ordinance was successfully created.' }
         format.json { render action: 'show', status: :created, location: @ordinance }
       else
         format.html { render action: 'new' }
@@ -42,7 +44,7 @@ class OrdinancesController < ApplicationController
   def update
     respond_to do |format|
       if @ordinance.update(ordinance_params)
-        format.html { redirect_to @ordinance, notice: 'Ordinance was successfully updated.' }
+        format.html { redirect_to sender_ancestors_path(@sender), notice: 'Ordinance was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -66,9 +68,17 @@ class OrdinancesController < ApplicationController
     def set_ordinance
       @ordinance = Ordinance.find(params[:id])
     end
+  
+    def set_sender
+      @sender = Sender.find(params[:sender_id])
+    end
+
+    def set_ancestor
+      @ancestor = Ancestor.find(params[:ancestor_id])
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ordinance_params
-      params.require(:ordinance).permit(:performed_in)
+      params.require(:ordinance).permit(:performed_in, :ordinance_type_id)
     end
 end

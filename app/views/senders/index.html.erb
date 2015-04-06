@@ -12,8 +12,6 @@
       <th>NIM</th>
       <th>Edad</th>
       <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -25,9 +23,19 @@
         <td><%= sender.phone %></td>
         <td><%= sender.nim %></td>
         <td><%= 'Adulto' if sender.adult %> <%= 'Joven' if sender.young %></td>
-        <td><%= link_to 'Ver detalles', sender %></td>
-        <td><%= link_to 'Editar', edit_sender_path(sender) %></td>
-        <td><%= link_to 'Eliminar', sender, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
+        <td>
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><%= icon('caret-down', 'Acciones') %></button>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'Ver detalles', sender %></li>
+              <li><%= link_to 'Editar', edit_sender_path(sender) %></li>
+              <li><%= link_to 'Eliminar', sender, method: :delete, data: { confirm: '¿Estás seguro?' } %></li>
+              <li class="divider"></li>
+              <li><%= link_to('Agregar un antepasado', new_sender_ancestor_path(sender)) %></li>
+              <li><%= link_to('Ver todos los antepasados', sender_ancestors_path(sender)) %></li>
+            </ul>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>

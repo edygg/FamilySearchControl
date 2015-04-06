@@ -5,5 +5,5 @@
   <%= @ordinance.performed_in %>
 </p>
 
-<%= link_to 'Edit', edit_ordinance_path(@ordinance) %> |
-<%= link_to 'Back', ordinances_path %>
+<%= link_to 'Edit', edit_sender_ancestor_ordinance_path(@sender, @ancestor, @ordinance) %> |
+<%= link_to 'Back', sender_ancestor_ordinances_path(@sender, @ancestor) %>

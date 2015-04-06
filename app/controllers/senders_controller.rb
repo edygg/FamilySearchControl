@@ -5,7 +5,7 @@ class SendersController < ApplicationController
   # GET /senders
   # GET /senders.json
   def index
-    @senders = Sender.all
+    @senders = Sender.all.where(user_id: current_user.id)
   end
 
   # GET /senders/1

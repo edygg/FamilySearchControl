@@ -1,14 +1,46 @@
-<p id="notice"><%= notice %></p>
+<div class="jumbotron">
+  <h1>Detalles de un antepasado</h1>
+</div>
+<div class="row">
+  <div class="col-sm-6 col-md-offset-3">
+    <p>
+      <strong>Nombres:</strong>
+      <%= @ancestor.names %>
+    </p>
 
-<p>
-  <strong>Names:</strong>
-  <%= @ancestor.names %>
-</p>
-
-<p>
-  <strong>Last names:</strong>
-  <%= @ancestor.last_names %>
-</p>
-
-<%= link_to 'Edit', edit_sender_ancestor_path(@sender, @ancestor) %> |
-<%= link_to 'Back', sender_ancestors_path(@sender) %>
+    <p>
+      <strong>Apellidos:</strong>
+      <%= @ancestor.last_names %>
+    </p>
+    <br>
+    <% if @ancestor.ordinances.empty? %>
+      <div class="alert alert-warning" role="alert">No se han registrado ordenanzas.</div>
+    <% else %>
+      <h2>Ordenanzas realizadas</h2>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Ordenanza</th>
+            <th>Realizada el</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @ancestor.ordinances.each do |ordinance| %>
+            <tr>
+              <td><%= ordinance.ordinance_type.name %></td>
+              <td><%= ordinance.performed_in %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>  
+<div class="row">
+  <div class="btn-group">
+    <%= link_to sender_ancestors_path(@sender), class: 'btn btn-default' do %>
+    <%= icon('arrow-left') %>
+    <% end %>
+    <%= link_to 'Editar', edit_sender_ancestor_path(@sender, @ancestor), class: 'btn btn-info'  %>
+  </div>
+</div>

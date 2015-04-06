@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <%= form_tag({ controller: 'home', action: 'dashboard'}, { method: 'get', class: 'form-inline'}) do %>
+      <div class="form-group">
+        <%= label_tag(:initial_date, 'Fecha inicial') %>
+        <%= date_field_tag(:initial_date, '', { class: 'form-control'}) %>
+      </div>
+      <div class="form-group">
+        <%= label_tag(:final_date, 'Fecha final') %>
+        <%= date_field_tag(:final_date, '', { class: 'form-control'}) %>
+      </div>
+      <%= submit_tag('Generar', class: 'btn btn-default') %>
+    <% end %>
+  </div>
+</div>
+<br><br>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <table class="table table-hover">
+      <tbody>
+        <tr>
+          <td>Nombres enviados</td>
+          <td><%= @names_count %></td>
+        </tr>
+        <tr>
+          <td>Jóvenes que enviaron nombres</td>
+          <td><%= @young_count %></td>
+        </tr>
+        <tr>
+          <td>Adultos que enviaron nombres</td>
+          <td><%= @adult_count %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

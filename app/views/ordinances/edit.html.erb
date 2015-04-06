@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @ordinance %> |
-<%= link_to 'Back', ordinances_path %>
+<%= link_to 'Show', [@sender, @ancestor, @ordinance] %> |
+<%= link_to 'Back', sender_ancestor_ordinances_path(@sender, @ancestor) %>

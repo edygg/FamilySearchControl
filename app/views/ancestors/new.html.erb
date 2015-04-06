@@ -1,5 +1,14 @@
-<h1>New ancestor</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', sender_ancestors_path(@sender) %>
+<div class="jumbotron">
+  <h1>Agregar un ancestro</h1>
+  <p>Estas agregando un ancestro a <%= "#{@sender.names} #{@sender.last_names}." %></p>
+</div>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <%= render 'form' %>
+  </div>
+</div>
+<div class="btn-group">
+  <%= link_to sender_ancestors_path(@sender), class: 'btn btn-default' do %>
+  <%= icon('arrow-left') %>
+  <% end %>
+</div>

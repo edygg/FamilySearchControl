@@ -1,12 +1,16 @@
-<h1>Listing ancestors</h1>
+<div class="jumbotron">
+  <h1>Antepasados</h1>
+  <h2>de <%= "#{@sender.names} #{@sender.last_names}" %></h2>
+  <br>
+  <p>Los antepasados son familiares de un enviador que ya han fallecido y se espera realizar convenios y ordenanzas en el templo por ellos.</p>
+</div>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
-      <th>Names</th>
-      <th>Last names</th>
-      <th></th>
-      <th></th>
+      <th>Nombres</th>
+      <th>Apellidos</th>
+      <th>Ordenanzas</th>
       <th></th>
     </tr>
   </thead>
@@ -16,9 +20,25 @@
       <tr>
         <td><%= ancestor.names %></td>
         <td><%= ancestor.last_names %></td>
-        <td><%= link_to 'Show', [@sender, ancestor] %></td>
-        <td><%= link_to 'Edit', edit_sender_ancestor_path(@sender, ancestor) %></td>
-        <td><%= link_to 'Destroy', [@sender, ancestor], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <% if ancestor.ordinance_types.empty? %>
+            No hay ordenanzas registradas.
+          <% else %>
+            <%= ancestor.ordinance_types.map { |ordinance_type| ordinance_type.name }.to_sentence(last_word_connector: ' y ', two_words_connector: ' y ') %>
+          <% end %>
+        </td>
+        <td>
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><%= icon('caret-down', 'Acciones') %></button>
+            <ul class="dropdown-menu">
+              <li><%= link_to 'Ver detalles', [@sender, ancestor] %></li>
+              <li><%= link_to 'Editar', edit_sender_ancestor_path(@sender, ancestor) %></li>
+              <li><%= link_to 'Eliminar', [@sender, ancestor], method: :delete, data: { confirm: '¿Estás seguro?' } %></li>
+              <li class="divider"></li>
+              <li><%= link_to 'Agregar ordenanza', new_sender_ancestor_ordinance_path(@sender, ancestor) %></li>
+            </ul>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +46,4 @@
 
 <br>
 
-<%= link_to 'New Ancestor', new_sender_ancestor_path %>
+<%= link_to 'Nuevo antepasado', new_sender_ancestor_path, class: 'btn btn-success' %>

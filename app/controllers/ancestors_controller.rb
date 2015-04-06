@@ -6,7 +6,7 @@ class AncestorsController < ApplicationController
   # GET /ancestors
   # GET /ancestors.json
   def index
-    @ancestors = @sender.ancestors
+    @ancestors = @sender.ancestors.where(user_id: current_user.id)
   end
 
   # GET /ancestors/1
@@ -27,10 +27,11 @@ class AncestorsController < ApplicationController
   # POST /ancestors.json
   def create
     @ancestor = @sender.ancestors.new(ancestor_params)
+    @ancestor.user_id = current_user.id
  
     respond_to do |format|
       if @ancestor.save
-        format.html { redirect_to [@sender, @ancestor], notice: 'Ancestor was successfully created.' }
+        format.html { redirect_to sender_ancestors_path(@sender), notice: 'Ancestor was successfully created.' }
         format.json { render action: 'show', status: :created, location: [@sender, @ancestor] }
       else
         format.html { render action: 'new' }
@@ -44,7 +45,7 @@ class AncestorsController < ApplicationController
   def update
     respond_to do |format|
       if @ancestor.update(ancestor_params)
-        format.html { redirect_to [@sender, @ancestor], notice: 'Ancestor was successfully updated.' }
+        format.html { redirect_to sender_ancestors_path(@sender), notice: 'Ancestor was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
